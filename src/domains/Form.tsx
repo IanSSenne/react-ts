@@ -1,7 +1,7 @@
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect, useState } from "react";
-import ButtonElement from '../components/ButtonElement';
-
+import {ButtonElement} from '../components/ButtonElement';
+import {InputElement} from '../components/InputElement';
 
 
 export default function App() {
@@ -22,7 +22,7 @@ export default function App() {
 
 
   const methods = useForm();
-  const {register, handleSubmit } = methods;
+  const { handleSubmit } = methods;
   const onSubmit = (data:string[]) => console.log(data);
 
   return (
@@ -30,15 +30,15 @@ export default function App() {
         <h1 className="text-base font-semibold">Student Name</h1>
         <div className="flex space-x-1 mb-4"> 
           <div className="w-1/3">
-            <input className="w-full" name="firstName" />
+            <InputElement className="w-full" name="firstName" />
             <label htmlFor="firstName">First Name</label>
           </div>
           <div className="w-1/3">
-            <input className="w-full" name="middleName" />
+            <InputElement className="w-full" name="middleName" />
             <label htmlFor="middleName">Middle Name</label>
           </div>
           <div className="w-1/3">
-            <input className="w-full" name="lastName" />
+            <InputElement className="w-full" name="lastName" />
             <label htmlFor="lastName">Last Name</label>
           </div>
         </div>
