@@ -123,7 +123,7 @@ export default function App() {
         </div>
         <div className="">
           <label className="text-base text-gray-600 font-semibold" htmlFor="comments">Additional Comments</label>
-          <textarea name="" id=""></textarea>
+          <textarea name="comments" id=""></textarea>
         </div>
         <hr className="mt-3 border-gray-200" />
         <div className="mt-8">
