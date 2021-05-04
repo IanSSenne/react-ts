@@ -4,9 +4,11 @@ type Props = {
   className: string,
   register?: any,
   defaultValue?: any,
-  data?: any;
+  data: any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void 
 }
-export  const SelectElement = ({register,id, name, className, defaultValue, data}: Props) => {
+
+export  const SelectElement = ({register, id, name, className, defaultValue, data}: Props) => {
   return (
     <select
       ref={register}

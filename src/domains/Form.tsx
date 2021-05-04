@@ -16,18 +16,18 @@ export default function App() {
     nevada: ['LasVegas', 'VirginiaCity']
   }
 
-  const [month, setMonth] = useState('');
-  const [day, setDay] = useState('');
-  const [years, setYears] = useState('');
+  const [month, setMonth] = useState([]);
+  const [day, setDay] = useState([]);
+  const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const [selectedCity, setSelectedCity] = useState('');
-  const [selectedState, setSelectedState] = useState('');
-  const [gender, setGender] = useState('');
-  const [courses, setCourses] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
+  const [selectedCity, setSelectedCity] = useState([]);
+  const [selectedState, setSelectedState] = useState([]);
+  const [gender, setGender] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [city, setCity] = useState([]);
+  const [state, setState] = useState([]);
 
   useEffect(() => {
     const resultMonth: any = generateArrayOfMonths();
@@ -60,14 +60,12 @@ export default function App() {
     }
   }, [])
 
-  const onChangeSelectMonth = (monthNumber:number) => {
-    setSelectedMonth(monthNumber);
+  const onChangeSelectMonth = (monthNumber:any) => {
     const newDayList:any = generateArrayOfDays(selectedYear,monthNumber);
     setDay(newDayList);
   }
 
-  const onChangeSelectYear = (yearNumber:number) => {
-    setSelectedYear(yearNumber);
+  const onChangeSelectYear = (yearNumber:any) => {
     const newDayList:any = generateArrayOfDays(yearNumber,selectedMonth);
     setDay(newDayList);
   }
@@ -76,14 +74,14 @@ export default function App() {
     const newCityList:any = generateArrayOfCities(cityByState[newState]);
     setCity(newCityList);
   }
-  ////////
-  const onChangeSelectGender = (newGender:string) => {
-    setGender(newGender);
-  }
 
-  const onChangeSelectCourses = (newCourses:string) => {
-    setCourses(newCourses);
-  } 
+  // const onChangeSelectGender = (newGender:any) => {
+  //   setGender(newGender);
+  // }
+
+  // const onChangeSelectCourses = (newCourses:any) => {
+  //   setCourses(newCourses);
+  // } 
 
   const methods = useForm();
   const { handleSubmit } = methods;
@@ -111,22 +109,22 @@ export default function App() {
             <h1 className="text-base font-semibold">Birth Day</h1>
             <div className="flex space-x-1">
               <div className="w-3/5">
-                <SelectElement className="w-full" name="month" id="month" data={month}  defaultValue={selectedMonth}/>
+                <SelectElement className="w-full" name="month" id="month" data={month} onChange={onChangeSelectMonth} defaultValue={selectedMonth}/>
                 <label htmlFor="month">Month</label>
               </div>
               <div className="w-2/5">
-                <SelectElement className="w-full" name="day" id="day" data={day}  defaultValue={selectedDay}/>
+                <SelectElement className="w-full" name="day" id="day" data={day} defaultValue={selectedDay}/>
                 <label htmlFor="day">Day</label>
               </div>
               <div className="w-2/5">
-                <SelectElement className="w-full" name="year" id="year" data={years}  defaultValue={selectedYear}/>
+                <SelectElement className="w-full" name="year" id="year" data={years} onChange={onChangeSelectYear} defaultValue={selectedYear}/>
                 <label htmlFor="year">Year</label>
               </div>
             </div>
           </div>
           <div className="w-1/2">
             <h1 className="text-base font-semibold">Gender</h1>
-            <SelectElement className="w-full" name="gender" id="gender"  />
+            <SelectElement className="w-full" name="gender" id="gender" data={gender} />
           </div>
         </div>
         <div className="mb-4">
@@ -140,11 +138,11 @@ export default function App() {
         </div>
         <div className="flex space-x-3 mb-4">
           <div className="w-1/2">
-            <SelectElement className="w-full" name="city" id="city" data={city}  defaultValue={selectedYear} />
+            <SelectElement className="w-full" name="city" id="city" data={city}  defaultValue={selectedCity} />
             <label htmlFor="city">City</label>
           </div>
           <div className="w-1/2">
-            <SelectElement className="w-full" name="state" id="state" data={state}  defaultValue={selectedYear} />
+            <SelectElement className="w-full" name="state" id="state" data={state}  defaultValue={selectedState} />
             <label htmlFor="state">State / Province</label>
           </div>
         </div>
@@ -183,7 +181,7 @@ export default function App() {
         </div>
         <div className="mb-4">
           <label className="text-base text-gray-600 font-semibold" htmlFor="courses">Courses</label>
-          <SelectElement className="w-1/2" name="courses" id="courses" />
+          <SelectElement className="w-1/2" name="courses" id="courses"  data={courses}/>
         </div>
         <div className="">
           <label className="text-base text-gray-600 font-semibold" htmlFor="comments">Additional Comments</label>
