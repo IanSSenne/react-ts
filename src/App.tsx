@@ -1,4 +1,3 @@
-import React from 'react';
 import Form from './domains/Form';
 
 function App() {
