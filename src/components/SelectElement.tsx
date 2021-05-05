@@ -1,11 +1,18 @@
+
+export interface dataProps {
+  value: number|string,
+  label: string
+}
+
+
 type Props = {
   id: string,
   name: string;
   className: string,
   register?: any,
-  defaultValue?: any,
-  data: any;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void 
+  defaultValue: string | number | readonly string[],
+  data: string[];
+  onChange?: (e: Array<string>) => void 
 }
 
 export  const SelectElement = ({register, id, name, className, defaultValue, data}: Props) => {
@@ -18,8 +25,8 @@ export  const SelectElement = ({register, id, name, className, defaultValue, dat
       onChange={(e) => e.target.value}
       value={defaultValue}
     >
-      {data?.length && data.map((item:any, index:any) =>
-        <option key={index.toString()} value={item.value}>{item.label}</option>
+      {data?.length && data.map((item: any, index:number) =>
+              <option key={index.toString()} value={item.value}>{item.label}</option>
       )}
     </select>
   );

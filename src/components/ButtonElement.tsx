@@ -1,6 +1,6 @@
 
 type Props = {
-  type: 'submit' | 'reset' | undefined,
+  type: 'submit' | 'reset',
   className?: string,
   label: string
 }

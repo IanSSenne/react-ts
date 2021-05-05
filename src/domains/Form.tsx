@@ -3,11 +3,10 @@ import { useEffect, useState } from "react";
 import {ButtonElement} from '../components/ButtonElement';
 import {InputElement} from '../components/InputElement';
 import { SelectElement } from "../components/SelectElement";
-import { generateArrayOfMonths, generateArrayOfDays, generateArrayOfYears, generateArrayOfGenders, generateArrayOfCourses, generateArrayOfCities, generateArrayOfStates } from '../api/getData';
 import { TextareaElement } from "../components/TextareaElement";
+import { generateArrayOfMonths, generateArrayOfDays, generateArrayOfYears, generateArrayOfGenders, generateArrayOfCourses, generateArrayOfCities, generateArrayOfStates } from '../api/getData';
 
-
-export default function App() {
+export default function Form() {
  
   const cityByState: any = {
     texas: ['ElPaso', 'Dallas'],
@@ -24,6 +23,8 @@ export default function App() {
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
   const [selectedCity, setSelectedCity] = useState([]);
   const [selectedState, setSelectedState] = useState([]);
+  const [selectedGender, setSelectedGender] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const [gender, setGender] = useState([]);
   const [courses, setCourses] = useState([]);
   const [city, setCity] = useState([]);
@@ -61,11 +62,13 @@ export default function App() {
   }, [])
 
   const onChangeSelectMonth = (monthNumber:any) => {
+    setSelectedMonth(monthNumber)
     const newDayList:any = generateArrayOfDays(selectedYear,monthNumber);
     setDay(newDayList);
   }
 
   const onChangeSelectYear = (yearNumber:any) => {
+    setSelectedYear(yearNumber)
     const newDayList:any = generateArrayOfDays(yearNumber,selectedMonth);
     setDay(newDayList);
   }
@@ -124,7 +127,7 @@ export default function App() {
           </div>
           <div className="w-1/2">
             <h1 className="text-base font-semibold">Gender</h1>
-            <SelectElement className="w-full" name="gender" id="gender" data={gender} />
+            <SelectElement className="w-full" name="gender" id="gender" data={gender} defaultValue={selectedGender}/>
           </div>
         </div>
         <div className="mb-4">
@@ -181,7 +184,7 @@ export default function App() {
         </div>
         <div className="mb-4">
           <label className="text-base text-gray-600 font-semibold" htmlFor="courses">Courses</label>
-          <SelectElement className="w-1/2" name="courses" id="courses"  data={courses}/>
+          <SelectElement className="w-1/2" name="courses" id="courses"  data={courses} defaultValue={selectedCourses}/>
         </div>
         <div className="">
           <label className="text-base text-gray-600 font-semibold" htmlFor="comments">Additional Comments</label>

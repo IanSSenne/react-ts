@@ -1,6 +1,6 @@
 type Props = {
-  className: any,
-  name: any,
+  className: string,
+  name: string,
   register?: any,
 }
 
