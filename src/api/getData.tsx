@@ -30,9 +30,17 @@ export function generateArrayOfCourses() {
   return Array.from({ length: courses.length }, (v, i) => ({ value: courses[i], label: courses[i].charAt(0).toUpperCase() + courses[i].slice(1) }));
 }
 
+
+
+interface StateInterface  {
+  texas: string[],
+  florida: string[],
+  indiana: string[],
+  nevada: string[],
+}
 // Data object for state/city
-const cityByState = {
-  texas: ['el Paso', 'dallas'],
+const cityByState: StateInterface = {
+  texas: ['el paso', 'dallas'],
   florida: ['miami', 'orlando'],
   indiana: ['indianapolis', 'madison'],
   nevada: ['las vegas', 'virginia']

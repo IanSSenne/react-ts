@@ -7,37 +7,45 @@ import { TextareaElement } from "../components/TextareaElement";
 import { generateArrayOfMonths, generateArrayOfDays, generateArrayOfYears, generateArrayOfGenders, generateArrayOfCourses, generateArrayOfCities, generateArrayOfStates } from '../api/getData';
 
 export default function Form() {
- 
-  const cityByState: any = {
+
+  interface StateInterface  {
+    texas: string[],
+    florida: string[],
+    indiana: string[],
+    nevada: string[],
+  }
+  // Data object for state/city
+  const cityByState: any /* StateInterface */ = {
     texas: ['el Paso', 'dallas'],
     florida: ['miami', 'orlando'],
     indiana: ['indianapolis', 'madison'],
     nevada: ['las vegas', 'virginia']
   }
   
+  const [years, setYears] = useState([]); 
   const [month, setMonth] = useState([]);
   const [day, setDay] = useState([]);
-  const [years, setYears] = useState([]);
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
   const [selectedDay, setSelectedDay] = useState(new Date().getDate());
-  const [selectedCity, setSelectedCity] = useState([]);
-  const [selectedState, setSelectedState] = useState([]);
-  const [selectedGender, setSelectedGender] = useState([]);
-  const [selectedCourses, setSelectedCourses] = useState([]);
-  const [gender, setGender] = useState([]);
-  const [courses, setCourses] = useState([]);
   const [city, setCity] = useState([]);
   const [state, setState] = useState([]);
+  const [gender, setGender] = useState([]);
+  const [courses, setCourses] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedState, setSelectedState] = useState('');
+  const [selectedGender, setSelectedGender] = useState('');
+  const [selectedCourses, setSelectedCourses] = useState('');
 
   useEffect(() => {
-    const resultMonth: any = generateArrayOfMonths();
+    const resultMonth  : any /*{ value: number; label: string; }[] */ = generateArrayOfMonths();
     const resultDay: any = generateArrayOfDays();
     const resultYears: any = generateArrayOfYears();
     const resultGender: any = generateArrayOfGenders();
     const resultCourses: any = generateArrayOfCourses();
     const resultCity: any = generateArrayOfCities();
     const resultState: any = generateArrayOfStates();
+
     if (resultMonth?.length) {
       setMonth(resultMonth);
     }
@@ -79,7 +87,7 @@ export default function Form() {
 
   const onChangeSelectState = (newState:any) => {
     setSelectedState(newState);
-    const newCityList:any = generateArrayOfCities(cityByState[newState]);
+    const newCityList: { value: string; label: string; }[] | any = generateArrayOfCities(cityByState[newState]);
     setCity(newCityList);
   }
 
