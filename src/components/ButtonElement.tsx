@@ -1,5 +1,4 @@
-
-type Props = {
+interface Props {
   type: 'submit' | 'reset',
   className?: string,
   label: string

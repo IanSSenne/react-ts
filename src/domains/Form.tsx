@@ -1,4 +1,4 @@
-import { useForm,FormProvider } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import { useEffect, useState } from "react";
 import {ButtonElement} from '../components/ButtonElement';
 import {InputElement} from '../components/InputElement';
@@ -9,12 +9,12 @@ import { generateArrayOfMonths, generateArrayOfDays, generateArrayOfYears, gener
 export default function Form() {
  
   const cityByState: any = {
-    texas: ['ElPaso', 'Dallas'],
-    florida: ['Miami', 'Orlando'],
-    indiana: ['Indianapolis', 'Madison'],
-    nevada: ['LasVegas', 'VirginiaCity']
+    texas: ['el Paso', 'dallas'],
+    florida: ['miami', 'orlando'],
+    indiana: ['indianapolis', 'madison'],
+    nevada: ['las vegas', 'virginia']
   }
-
+  
   const [month, setMonth] = useState([]);
   const [day, setDay] = useState([]);
   const [years, setYears] = useState([]);
@@ -73,24 +73,34 @@ export default function Form() {
     setDay(newDayList);
   }
 
-  const onChangeSelectState = (newState:string) => {
+  const onChangeSelectDay = (newDay:any) => {
+    setSelectedDay(newDay)
+  }
+
+  const onChangeSelectState = (newState:any) => {
+    setSelectedState(newState);
     const newCityList:any = generateArrayOfCities(cityByState[newState]);
     setCity(newCityList);
   }
 
-  // const onChangeSelectGender = (newGender:any) => {
-  //   setGender(newGender);
-  // }
+  const onChangeSelectCity = (newCity:any) => {
+    setSelectedCity(newCity);
+  }
 
-  // const onChangeSelectCourses = (newCourses:any) => {
-  //   setCourses(newCourses);
-  // } 
+  const onChangeSelectGender = (newGender:any) => {
+    setSelectedGender(newGender);
+  }
+
+  const onChangeSelectCourses = (newCourses:any) => {
+    setSelectedCourses(newCourses);
+  } 
 
   const methods = useForm();
   const { handleSubmit } = methods;
   const onSubmit = (data:string[]) => console.log(data);
 
   return (
+    <FormProvider {...methods}>
       <form className="text-sm" onSubmit={handleSubmit(onSubmit)} >
         <h1 className="text-base font-semibold">Student Name</h1>
         <div className="flex space-x-1 mb-4"> 
@@ -116,7 +126,7 @@ export default function Form() {
                 <label htmlFor="month">Month</label>
               </div>
               <div className="w-2/5">
-                <SelectElement className="w-full" name="day" id="day" data={day} defaultValue={selectedDay}/>
+                <SelectElement className="w-full" name="day" id="day" data={day} onChange={onChangeSelectDay} defaultValue={selectedDay}/>
                 <label htmlFor="day">Day</label>
               </div>
               <div className="w-2/5">
@@ -127,7 +137,7 @@ export default function Form() {
           </div>
           <div className="w-1/2">
             <h1 className="text-base font-semibold">Gender</h1>
-            <SelectElement className="w-full" name="gender" id="gender" data={gender} defaultValue={selectedGender}/>
+            <SelectElement className="w-full" name="gender" id="gender" data={gender} onChange={onChangeSelectGender} defaultValue={selectedGender}/>
           </div>
         </div>
         <div className="mb-4">
@@ -141,11 +151,11 @@ export default function Form() {
         </div>
         <div className="flex space-x-3 mb-4">
           <div className="w-1/2">
-            <SelectElement className="w-full" name="city" id="city" data={city}  defaultValue={selectedCity} />
+            <SelectElement className="w-full" name="city" id="city" data={city} onChange={onChangeSelectCity} defaultValue={selectedCity} />
             <label htmlFor="city">City</label>
           </div>
           <div className="w-1/2">
-            <SelectElement className="w-full" name="state" id="state" data={state}  defaultValue={selectedState} />
+            <SelectElement className="w-full" name="state" id="state" data={state} onChange={onChangeSelectState}  defaultValue={selectedState} />
             <label htmlFor="state">State / Province</label>
           </div>
         </div>
@@ -184,7 +194,7 @@ export default function Form() {
         </div>
         <div className="mb-4">
           <label className="text-base text-gray-600 font-semibold" htmlFor="courses">Courses</label>
-          <SelectElement className="w-1/2" name="courses" id="courses"  data={courses} defaultValue={selectedCourses}/>
+          <SelectElement className="w-1/2" name="courses" id="courses"  data={courses} onChange={onChangeSelectCourses} defaultValue={selectedCourses}/>
         </div>
         <div className="">
           <label className="text-base text-gray-600 font-semibold" htmlFor="comments">Additional Comments</label>
@@ -196,5 +206,6 @@ export default function Form() {
           <ButtonElement type="reset" label="Clear Fields" className="float-right" />
         </div >
       </form >
+    </FormProvider>
   );
 }

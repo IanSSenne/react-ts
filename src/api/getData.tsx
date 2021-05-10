@@ -7,7 +7,7 @@ export function generateArrayOfYears() {
   var years:number[] = []
   for (var i = max; i >= min; i--) {
     years.push(i)
-  } return Array.from({ length: years.length }, (v, i) => ({ value: i, label: years[i] }));
+  } return Array.from({ length: years.length }, (v, i) => ({ value: years[i], label: years[i] }));
 }
 
 export function generateArrayOfDays(year = currentTime, month = 1) {
@@ -22,26 +22,26 @@ export function generateArrayOfMonths() {
 
 export function generateArrayOfGenders() {
   let genders = ['male', 'female', 'other'];
-  return Array.from({ length: genders.length }, (v, i) => ({ value: genders[i], label: genders[i] }));
+  return Array.from({ length: genders.length }, (v, i) => ({ value: genders[i], label: genders[i].charAt(0).toUpperCase() + genders[i].slice(1) }));
 }
 
 export function generateArrayOfCourses() {
   let courses = ['java', 'javascript', 'ruby', 'php']
-  return Array.from({ length: courses.length }, (v, i) => ({ value: courses[i], label: courses[i] }));
+  return Array.from({ length: courses.length }, (v, i) => ({ value: courses[i], label: courses[i].charAt(0).toUpperCase() + courses[i].slice(1) }));
 }
 
 // Data object for state/city
 const cityByState = {
-  texas: ['ElPaso', 'Dallas'],
-  florida: ['Miami', 'Orlando'],
-  indiana: ['Indianapolis', 'Madison'],
-  nevada: ['LasVegas', 'VirginiaCity']
+  texas: ['el Paso', 'dallas'],
+  florida: ['miami', 'orlando'],
+  indiana: ['indianapolis', 'madison'],
+  nevada: ['las vegas', 'virginia']
 }
 
 export function generateArrayOfCities(cities = cityByState.texas) {
-  return Array.from({ length: cities.length }, (v, i) => ({ value: cities[i].replace(/\s+/g, '-').toLowerCase(), label: cities[i] }));
+  return Array.from({ length: cities.length }, (v, i) => ({ value: cities[i].replace(/\s+/g, '-').toLowerCase(), label: cities[i].charAt(0).toUpperCase() + cities[i].slice(1) }));
 }
 
 export function generateArrayOfStates(state = Object.keys(cityByState)) {
-  return Array.from({ length: state.length }, (v, i) => ({ value: state[i], label: state[i] })); // change value to word - city[i].replace(/\s+/g, '-').toLowerCase()
+  return Array.from({ length: state.length }, (v, i) => ({ value: state[i], label: state[i].charAt(0).toUpperCase() + state[i].slice(1) })); 
 }

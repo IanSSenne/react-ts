@@ -1,33 +1,41 @@
+import { useFormContext } from "react-hook-form";
 
-export interface dataProps {
-  value: number|string,
+export interface SelectItem {
+  value: number | string,
   label: string
 }
 
+export interface ValueItem {
+  value: number | string,
+  label: string
+}
 
-type Props = {
+interface Props  {
   id: string,
   name: string;
   className: string,
-  register?: any,
-  defaultValue: string | number | readonly string[],
-  data: string[];
-  onChange?: (e: Array<string>) => void 
+  defaultValue: string | number | readonly string[] | undefined,
+  data: SelectItem[];
+  onChange?: (e: string | number) => void 
 }
 
-export  const SelectElement = ({register, id, name, className, defaultValue, data}: Props) => {
+export  const SelectElement = (props: Props) => {
+  const {register} = useFormContext();
   return (
     <select
-      ref={register}
-      id={id}
-      name={name}
-      className={`border-gray-400 block py-1 px-3 ${className} rounded focus:border-indigo-500 focus:ring-indigo-500`}
-      onChange={(e) => e.target.value}
-      value={defaultValue}
+      {...register(props.name)}
+      id={props.id}
+      name={props.name}
+      className={`border-gray-400 block py-1 px-3 ${props.className} rounded focus:border-indigo-500 focus:ring-indigo-500`}
+      onChange={(e) => { props?.onChange && props.onChange(e.target.value) }}
+      value={props.defaultValue}
     >
-      {data?.length && data.map((item: any, index:number) =>
-              <option key={index.toString()} value={item.value}>{item.label}</option>
-      )}
+      {props.data?.length && 
+        props.data.map((item: SelectItem) => (
+          <option key={item.value.toString()} value={item.value}>
+            {item.label}
+          </option>
+      ))}
     </select>
   );
-}
+};

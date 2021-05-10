@@ -1,17 +1,18 @@
-type Props = {
+import { useFormContext } from "react-hook-form";
+
+interface Props {
   className: string,
   name: string,
-  register?: any,
 }
 
-export  const InputElement = ({register, name, className}: Props) => {
-
+export  const InputElement = (props: Props) => {
+  const {register} = useFormContext();
   return (
     <input
-      ref={register}
+      {...register(props.name)}
       type="text"
-      name={name}
-      className={`border-gray-400 block py-1 ${className} px-3 rounded focus:border-indigo-500 focus:ring-indigo-500 `}
+      name={props.name}
+      className={`border-gray-400 block py-1 ${props.className} px-3 rounded focus:border-indigo-500 focus:ring-indigo-500 `}
     />
   );
 }
